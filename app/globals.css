@@ -48,7 +48,7 @@ h2 { font-size: 15px; font-weight: 700; color: var(--muted); margin: 0 0 28px; l
 .item.route::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 4px; width: 2px; background: var(--line); }
 .item.route::after { content: ""; position: absolute; left: 0; top: 52%; bottom: 4px; width: 2px; background: var(--fallback); }
 
-.now p, .books p { max-width: 62ch; margin: 0 0 14px; }
+.now p, .elsewhere p { max-width: 62ch; margin: 0 0 14px; }
 .contact p { margin: 0 0 20px; max-width: 52ch; font-size: 20px; font-weight: 500; line-height: 1.4; }
 .links { display: flex; gap: 28px; flex-wrap: wrap; font-weight: 500; }
 footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; }

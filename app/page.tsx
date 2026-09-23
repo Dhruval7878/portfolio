@@ -99,9 +99,14 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="books">
-        <h2>Books</h2>
+      <section className="elsewhere">
+        <h2>Elsewhere</h2>
         <p>Recently read <em>The Accidental CTO</em> by Subhash Choudhary.</p>
+        <p>
+          13,000+ games of{" "}
+          <a href="https://www.chess.com/member/dhruval254">chess</a> since
+          2021 — rapid peaked at 1632.
+        </p>
       </section>
 
       <section className="contact">
