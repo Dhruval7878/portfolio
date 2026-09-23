@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Schibsted_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Ubuntu, JetBrains_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
-const sans = Schibsted_Grotesk({
+const sans = Ubuntu({
   subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
+  weight: ["300", "400", "500", "700"],
   variable: "--font-sans",
 });
 const mono = JetBrains_Mono({
