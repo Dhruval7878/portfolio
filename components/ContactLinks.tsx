@@ -10,6 +10,7 @@ const LINKS = [
   },
   { id: "github", href: "https://github.com/Dhruval7878", text: "GitHub" },
   { id: "x", href: "https://x.com/Dhruval254", text: "X" },
+  { id: "resume", href: "https://bit.ly/dhruval_patadiya", text: "Resume" },
 ];
 
 export default function ContactLinks() {

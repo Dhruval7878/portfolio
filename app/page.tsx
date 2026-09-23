@@ -99,6 +99,11 @@ export default function Home() {
         </p>
       </section>
 
+      <section className="books">
+        <h2>Books</h2>
+        <p>Recently read <em>The Accidental CTO</em> by Subhash Choudhary.</p>
+      </section>
+
       <section className="contact">
         <h2>Contact</h2>
         <p>
