@@ -101,7 +101,13 @@ export default function Home() {
 
       <section className="elsewhere">
         <h2>Elsewhere</h2>
-        <p>Recently read <em>The Accidental CTO</em> by Subhash Choudhary.</p>
+        <p>
+          Recently read <em>The Accidental CTO</em> by Subhash Choudhary —{" "}
+          <a href="https://x.com/Dhruval254/status/2102683155673288912">
+            wrote about it on X
+          </a>
+          .
+        </p>
         <p>
           13,000+ games of{" "}
           <a href="https://www.chess.com/member/dhruval254">chess</a> since

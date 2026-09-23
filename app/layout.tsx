@@ -26,7 +26,8 @@ export const metadata: Metadata = {
     url: "https://dhruval.dev",
   },
   icons: {
-    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📞</text></svg>",
+    icon:
+      "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232450C8'/><rect x='46' y='8' width='8' height='16' fill='white'/><rect x='38' y='14' width='24' height='6' fill='white'/><path d='M30 30 L70 30 L80 80 L20 80 Z' fill='white'/></svg>",
   },
 };
 
