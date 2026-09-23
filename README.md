@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# dhruval.dev
 
-## Getting Started
+Personal portfolio. Static Next.js export deployed to Cloudflare Workers (static assets).
 
-First, run the development server:
+## Build
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Output goes to `out/` — a static export (`output: "export"` in `next.config.ts`). No API routes, no middleware; redirects are handled entirely by `public/_redirects`, which is copied into `out/` on build.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `NEXT_PUBLIC_GA_ID` — Google Analytics 4 measurement ID (e.g. `G-XXXXXXXXXX`), read at build time and baked into the static output by `@next/third-parties`'s `GoogleAnalytics` component. Set in `.env.production` (gitignored).
 
-## Learn More
+## Redirects (`public/_redirects`)
 
-To learn more about Next.js, take a look at the following resources:
+| Path  | Destination |
+|-------|-------------|
+| `/r`  | `/?utm_source=resume&utm_medium=pdf` — link used on the PDF resume |
+| `/gh` | GitHub profile |
+| `/x`  | X profile |
+| `/li` | LinkedIn profile |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy (Cloudflare Workers)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+npx wrangler dev      # verify locally
+npx wrangler deploy   # ship
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Config lives in `wrangler.jsonc`: serves `./out` as static assets, `not_found_handling: "404-page"`, custom domain route for `dhruval.dev`.
