@@ -68,7 +68,14 @@ function Items({ items }: { items: Item[] }) {
 export default function Home() {
   return (
     <div className="wrap">
-      <header>
+      <nav className="nav">
+        <a href="#about">About</a>
+        <a href="#work">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Connect</a>
+      </nav>
+
+      <header id="about">
         <h1>Dhruval</h1>
         <p className="lede">
           I build backend systems that keep working when the first path fails.
@@ -76,7 +83,7 @@ export default function Home() {
         <Trace />
       </header>
 
-      <section>
+      <section id="work">
         <h2>Work</h2>
         <div className="role">
           <h3>Digitattva Technolabs</h3>
@@ -85,7 +92,7 @@ export default function Home() {
         <Items items={work} />
       </section>
 
-      <section>
+      <section id="projects">
         <h2>On my own</h2>
         <Items items={own} />
       </section>
@@ -115,7 +122,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="contact">
+      <section id="contact" className="contact">
         <h2>Contact</h2>
         <p>
           Looking for backend, infrastructure and applied AI roles in Bengaluru.

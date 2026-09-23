@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon:
-      "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232450C8'/><g fill='white'><rect x='46' y='6' width='8' height='14'/><rect x='36' y='12' width='28' height='7'/><circle cx='50' cy='27' r='8'/><rect x='44' y='33' width='12' height='6'/><path d='M32,41 C28,53 23,61 19,73 C17,79 17,85 21,89 L79,89 C83,85 83,79 81,73 C77,61 72,53 68,41 Z'/><ellipse cx='50' cy='89' rx='34' ry='6'/></g></svg>",
+      "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232450C8'/><g fill='white'><rect x='46' y='6' width='8' height='14'/><rect x='37' y='13' width='26' height='6'/><circle cx='50' cy='26' r='7'/><rect x='44' y='33' width='12' height='5'/><polygon points='42,38 58,38 76,84 24,84'/><rect x='16' y='84' width='68' height='7' rx='3'/></g></svg>",
   },
 };
 
