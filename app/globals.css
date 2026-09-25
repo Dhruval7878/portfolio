@@ -32,8 +32,6 @@ h1 { font-weight: 800; font-size: clamp(44px, 9vw, 84px); line-height: .95; lett
 .b64 { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px;
        color: var(--muted); opacity: .6; margin: 0 0 12px; word-break: break-all; }
 
-.greeting { color: var(--muted); font-size: 16px; margin: 0; }
-
 section { padding: 48px 0; border-top: 1px solid var(--rule); }
 h2 { font-size: 15px; font-weight: 700; color: var(--muted); margin: 0 0 28px; letter-spacing: .01em; }
 .role { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }

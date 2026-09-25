@@ -18,7 +18,7 @@ Output goes to `out/` — a static export (`output: "export"` in `next.config.ts
 
 | Path  | Destination |
 |-------|-------------|
-| `/r`  | `/?utm_source=resume&utm_medium=pdf` — link used on the PDF resume |
+| `/resume` | Resume PDF on Google Drive |
 | `/gh` | GitHub profile |
 | `/x`  | X profile |
 | `/li` | LinkedIn profile |

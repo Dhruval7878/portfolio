@@ -1,4 +1,3 @@
-import Trace from "@/components/Trace";
 import ContactLinks from "@/components/ContactLinks";
 
 type Item = {
@@ -180,7 +179,6 @@ export default async function Home() {
       <header id="about">
         <p className="lede">Build things, break things, repeat.</p>
         <p className="b64">QnVpbGQgdGhpbmdzLCBicmVhayB0aGluZ3MsIHJlcGVhdC4=</p>
-        <Trace />
       </header>
 
       <section id="work">
