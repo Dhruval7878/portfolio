@@ -65,21 +65,121 @@ function Items({ items }: { items: Item[] }) {
   ));
 }
 
-export default function Home() {
+const CHESS_USERNAME = "dhruval254";
+
+type RatingPoint = { month: string; rating: number };
+
+async function fetchRapidHistory(): Promise<{
+  points: RatingPoint[];
+  peak: number;
+}> {
+  const points: RatingPoint[] = [];
+  let peak = 0;
+
+  const archivesRes = await fetch(
+    `https://api.chess.com/pub/player/${CHESS_USERNAME}/games/archives`,
+  );
+  if (!archivesRes.ok) return { points, peak };
+  const { archives }: { archives: string[] } = await archivesRes.json();
+
+  const BATCH = 5;
+  for (let i = 0; i < archives.length; i += BATCH) {
+    const batch = archives.slice(i, i + BATCH);
+    const results = await Promise.all(
+      batch.map(async (url) => {
+        const res = await fetch(url);
+        if (!res.ok) return null;
+        const data: {
+          games: {
+            time_class: string;
+            white: { username: string; rating: number };
+            black: { username: string; rating: number };
+          }[];
+        } = await res.json();
+        return { url, games: data.games };
+      }),
+    );
+
+    for (const result of results) {
+      if (!result) continue;
+      let lastRating: number | undefined;
+      for (const g of result.games) {
+        if (g.time_class !== "rapid") continue;
+        const me =
+          g.white.username.toLowerCase() === CHESS_USERNAME
+            ? g.white
+            : g.black;
+        lastRating = me.rating;
+        if (me.rating > peak) peak = me.rating;
+      }
+      if (lastRating !== undefined) {
+        const month = result.url.slice(-7).replace("/", "-");
+        points.push({ month, rating: lastRating });
+      }
+    }
+  }
+
+  return { points, peak };
+}
+
+function RatingChart({ points, peak }: { points: RatingPoint[]; peak: number }) {
+  if (points.length < 2) return null;
+
+  const width = 640;
+  const height = 120;
+  const pad = 8;
+  const ratings = points.map((p) => p.rating);
+  const min = Math.min(...ratings);
+  const max = Math.max(...ratings, peak);
+  const xStep = (width - pad * 2) / (points.length - 1);
+  const scaleY = (r: number) =>
+    height - pad - ((r - min) / (max - min || 1)) * (height - pad * 2);
+
+  const path = points
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${pad + i * xStep} ${scaleY(p.rating)}`)
+    .join(" ");
+
+  const first = points[0];
+  const last = points[points.length - 1];
+
+  return (
+    <>
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        className="chess-chart"
+        role="img"
+        aria-label={`Rapid rating from ${first.rating} in ${first.month} to ${last.rating} in ${last.month}, peaking at ${peak}.`}
+      >
+        <path d={path} fill="none" style={{ stroke: "var(--line)" }} strokeWidth={2} />
+      </svg>
+      <p className="stack">
+        {first.month} → {last.month} · peak {peak} · now {last.rating}
+      </p>
+    </>
+  );
+}
+
+export default async function Home() {
+  const rapid = await fetchRapidHistory();
+
   return (
     <div className="wrap">
       <nav className="nav">
-        <a href="#about">About</a>
-        <a href="#work">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Connect</a>
+        <div className="nav-links">
+          <a href="#about">About</a>
+          <a href="#work">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Connect</a>
+        </div>
+        <div className="nav-meta">
+          <a href="mailto:dhruval0254@gmail.com">dhruval0254@gmail.com</a>
+          <span>Bengaluru, India</span>
+        </div>
       </nav>
 
       <header id="about">
-        <h1>Dhruval</h1>
-        <p className="lede">
-          I build backend systems that keep working when the first path fails.
-        </p>
+        <p className="lede">Build things, break things, repeat.</p>
+        <p className="b64">QnVpbGQgdGhpbmdzLCBicmVhayB0aGluZ3MsIHJlcGVhdC4=</p>
         <Trace />
       </header>
 
@@ -120,17 +220,28 @@ export default function Home() {
           <a href="https://www.chess.com/member/dhruval254">chess</a> since
           2021 — rapid peaked at 1632.
         </p>
+        <details className="chess-chart-toggle">
+          <summary>Show rating chart</summary>
+          <RatingChart points={rapid.points} peak={rapid.peak} />
+        </details>
       </section>
 
       <section id="contact" className="contact">
         <h2>Contact</h2>
         <p>
-          Looking for backend, infrastructure and applied AI roles in Bengaluru.
+          Looking for full-stack, infrastructure and applied AI roles in
+          Bengaluru.
         </p>
         <ContactLinks />
       </section>
 
-      <footer>Bengaluru, India</footer>
+      <footer>
+        <p>Bengaluru, India</p>
+        <p className="colophon">
+          Colophon — Set in Ubuntu. Static export, deployed on Cloudflare
+          Workers.
+        </p>
+      </footer>
     </div>
   );
 }

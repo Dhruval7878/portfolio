@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Ubuntu, JetBrains_Mono } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { Ubuntu } from "next/font/google";
+import Analytics from "@/components/Analytics";
 import "./globals.css";
 
 const sans = Ubuntu({
@@ -8,21 +8,16 @@ const sans = Ubuntu({
   weight: ["300", "400", "500", "700"],
   variable: "--font-sans",
 });
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dhruval.dev"),
-  title: "Dhruval — backend engineer",
+  title: "Dhruval — full-stack engineer",
   description:
-    "Backend engineer in Bengaluru. Real-time systems, WebRTC calling, notifications, and applied AI.",
+    "Full-stack engineer in Bengaluru. Real-time systems, WebRTC calling, notifications, and applied AI.",
   openGraph: {
-    title: "Dhruval — backend engineer",
+    title: "Dhruval — full-stack engineer",
     description:
-      "I build backend systems that keep working when the first path fails.",
+      "I build full-stack systems that keep working when the first path fails.",
     url: "https://dhruval.dev",
   },
   icons: {
@@ -44,9 +39,9 @@ export default function RootLayout({
 }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={sans.variable}>
       <body>{children}</body>
-      {gaId && <GoogleAnalytics gaId={gaId} />}
+      {gaId && <Analytics gaId={gaId} />}
     </html>
   );
 }
